@@ -1,2 +1,3 @@
 # YoRPG_ABA
-Team ABA's YoRPG repository
+Team ABA
+Ariella Katz, Alif Rahman, Brianna Tieu, Tom, Grippy, Pepe

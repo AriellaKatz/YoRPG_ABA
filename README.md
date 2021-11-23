@@ -4,7 +4,7 @@ Ariella Katz, Alif Rahman, Brianna Tieu, Tom, Grippy, Pepe
 Protagonist: Tank, Healer, and Warrior
   - Tank: Gives protagonist higher defense
   - Healer: Allows protagonist to replenish hp once per game
-  - Warrior: Gives protagnist higher attack
+  - Warrior: Gives protagonist higher attack
 Monster: LowLevel, MidLevel, and Boss
   - LowLevel: Monster with low attack level
   - MidLevel: Monster with average attack level

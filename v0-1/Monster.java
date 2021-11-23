@@ -3,7 +3,7 @@
   the adventurer's natural enemy in Ye Olde RPG
 **/
 
-public class Monster extends Character {
+public class Monster {
 
   // ~~~~~~~~~~~ INSTANCE VARIABLES ~~~~~~~~~~~
   private int _hitPts;

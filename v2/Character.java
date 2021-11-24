@@ -20,10 +20,17 @@ QCC:
 
 public class Character {
 
-	public int hp;
-	public int strength;
-	public int defense;
-	public double attackRating;
+	protected int hp;
+	protected int strength;
+	protected int defense;
+	protected double attackRating;
+
+	public Character(int hp, int strength, int defense, double attackRating) {
+		this.hp = hp;
+		this.strength = strength;
+		this.defense = defense;
+		this.attackRating = attackRating;
+	}
 
 	public boolean isAlive() {
 		return (hp > 0);
@@ -38,7 +45,7 @@ public class Character {
 	}
 
 	public int attack(Character opponent) {
-		int damage = (int)(strength * attackRating) - opponent.defense
+		int damage = (int)(strength * attackRating) - opponent.defense;
 		if (damage < 0) { damage = 0; }
 		opponent.lowerHP(damage);
 		return damage;

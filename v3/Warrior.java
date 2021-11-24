@@ -12,4 +12,8 @@ public class Warrior extends Protagonist {
 		name = inName;
 	}
 
+	public static String about() {
+		String description = "Gives protagonist higher attack level.";
+		 return description;
+	}
 }

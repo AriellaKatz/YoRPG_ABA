@@ -10,4 +10,8 @@ public class Tank extends Protagonist {
                 name = inName;
         }
 
+	public static String about() {
+		String description = "Gives the protagonist a higher hp.";
+		 return description;
+	}
 }

@@ -11,16 +11,18 @@
  * (If you feel other changes are merited, note what and why, so that we may discuss on the 'morrow.)
  * 
  * DISCO:
- *
+ *  Inheritance
+ *  super, super()
+ *  protector is a 3rd option for privacy
  * QCC:
- * 
+ *  
  **********************************************/
 
 /*
 OUR DRIVER MODS:
 Removed instantiations of the protagonist and the monster so that we would later be able to specify what type of protagonist or
 monster it would be. Added code to choose protagonist based on player input and choose monster type based on how many rounds
-had been played.
+had been played. Added code to allow player to utilize Healer capabilities if the player is a Healer.
 */
 
 import java.io.*;

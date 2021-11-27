@@ -94,6 +94,7 @@ public class YoRPG {
 	    name = in.readLine();
     }
     catch ( IOException e ) { }
+//  System.out.println("Your name: " + name);
 
     s += name + ", choose your player:\n";
     s += "\t1: Healer\n";
@@ -103,9 +104,19 @@ public class YoRPG {
     System.out.print(s);
 
     try {
-	    if (Integer.parseInt(in.readLine()) == 1) { pat = new Healer (name); isHealer = true; }
-	    else if (Integer.parseInt(in.readLine()) == 2) { pat = new Tank (name); }
-	    else if (Integer.parseInt(in.readLine()) == 3) { pat = new Warrior (name); }
+	    if (Integer.parseInt(in.readLine()) == 1) {
+	      pat = new Healer (name);
+              isHealer = true;
+//	      System.out.println("\n" + name + "is a Healer")
+            }
+	    else if (Integer.parseInt(in.readLine()) == 2) {
+	      pat = new Tank (name);
+//            System.out.println("\n" + name + "is a Tank")
+            }
+	    else if (Integer.parseInt(in.readLine()) == 3) {
+              pat = new Warrior (name);
+//            System.out.println("\n" + name + "is a Warrior")
+            }
     }
     catch ( IOException e ) { }
 
@@ -129,9 +140,30 @@ public class YoRPG {
     else {
       System.out.println( "\nLo, yonder monster approacheth!" );
 
-      if (encounters < 2) { smaug = new LowLevel(); }
-      else if (encounters > 3) { smaug = new Boss(); }
-      else { smaug = new MidLevel(); }
+      if (encounters < 2) {
+        smaug = new LowLevel();
+//      System.out.println("smaug is LowLevel");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
+      else if (encounters > 3) {
+        smaug = new Boss();
+//      System.out.println("smaug is Boss");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
+      else {
+        smaug = new MidLevel();
+//      System.out.println("smaug is MidLevel");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
 
       while( smaug.isAlive() && pat.isAlive() ) {
 
@@ -145,10 +177,16 @@ public class YoRPG {
         }
         catch ( IOException e ) { }
 
-        if ( i == 2 )
+        if ( i == 2 ) {
           pat.specialize();
-        else
+//        System.out.println(name + "'s attack rating is " + pat.attackRating);
+//        System.out.println(name + "'s defense is " + pat.getDefense());
+        }
+        else {
           pat.normalize();
+//        System.out.println(name + "'s attack rating is " + pat.attackRating);
+//        System.out.println(name + "'s defense is " + pat.getDefense());
+        }
 
         d1 = pat.attack( smaug );
         d2 = smaug.attack( pat );
@@ -158,6 +196,15 @@ public class YoRPG {
 
         System.out.println( "\n" + "Ye Olde Monster smacked " + pat.getName() +
                             " for " + d2 + " points of damage.");
+//      System.out.println("pat's stats:\n" + "hp: " +
+//      pat.hp + "\tstrength: " + pat.strength +
+//      "\tdefense: " + pat.getDefense() + "\tattackRating: " +
+//      pat.attackRating);
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+
 
 	if ((isHealer) && (!alreadyHealed)) {
 		try {
@@ -166,7 +213,12 @@ public class YoRPG {
        		  i = Integer.parseInt( in.readLine() );
        		}
 	        catch ( IOException e ) { }
-		if (i == 2) { pat.hp = 125; alreadyHealed = true; System.out.println("You have been restored to full health! However, you have used up all your mana!"); }
+		if (i == 2) {
+                  pat.hp = 125; alreadyHealed = true;
+                  System.out.println("You have been restored to full health! " +
+                  "However, you have used up all your mana!");
+                }
+//		System.out.println("pat's hp: " + pat.hp)
 	}
       }//end while
 

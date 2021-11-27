@@ -38,7 +38,7 @@ public class Character {
 	}
 
 	public int attack(Character opponent) {
-		int damage = (int)(strength * attackRating) - opponent.defense
+		int damage = (int)(strength * attackRating) - opponent.defense;
 		if (damage < 0) { damage = 0; }
 		opponent.lowerHP(damage);
 		return damage;

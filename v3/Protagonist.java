@@ -46,4 +46,7 @@ public class Protagonist extends Character {
         defense = 40;
     }
 
+    public void heal() {
+    }
+
 }//end class Protagonist

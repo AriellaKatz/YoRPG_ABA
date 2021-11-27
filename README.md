@@ -13,3 +13,4 @@
   * v0-1: Code pulled from closet repo (future code will build off of this v0, not the other)
   * v1: Adds superclass Character with Protagonist and Monster as subclasses
   * v2: Adds 3 subclasses of Protagonist and Monster each, eliminates redundancies between Protagonist/Monster and Character
+  * v3: Adds about() methods for each subclass, recodes Healer subclass functionality

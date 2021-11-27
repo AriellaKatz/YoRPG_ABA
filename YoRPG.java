@@ -16,6 +16,13 @@
  * 
  **********************************************/
 
+/*
+OUR DRIVER MODS:
+Removed instantiations of the protagonist and the monster so that we would later be able to specify what type of protagonist or
+monster it would be. Added code to choose protagonist based on player input and choose monster type based on how many rounds
+had been played.
+*/
+
 import java.io.*;
 import java.util.*;
 
@@ -26,13 +33,19 @@ public class YoRPG {
   //change this constant to set number of encounters in a game
   public final static int MAX_ENCOUNTERS = 5;
 
-  //each round, a Protagonist and a Monster will be instantiated...
-  private Protagonist pat;
-  private Monster smaug;
+  private Healer pat;
+  private Tank pat;
+  private Warrior pat;
+  private LowLevel smaug;
+  private MidLevel smaug;
+  private Boss smaug;
 
   private int moveCount;
   private boolean gameOver;
   private int difficulty;
+
+  private boolean isHealer = false;
+  private boolean alreadyHealed = false;
 
   private InputStreamReader isr;
   private BufferedReader in;
@@ -84,8 +97,21 @@ public class YoRPG {
     }
     catch ( IOException e ) { }
 
+    s += name + ", choose your player:\n";
+    s += "\t1: Healer\n";
+    s += "\t2: Tank\n";
+    s += "\t3: Warrior\n";
+    s += "Selection: ";
+    System.out.print(s);
+
+    try {
+	    if (Integer.parseInt(in.readLine()) == 1) { pat = new Healer (name); isHealer = true; }
+	    else if (Integer.parseInt(in.readLine()) == 2) { pat = new Tank (name); }
+	    else if (Integer.parseInt(in.readLine()) == 3) { pat = new Warrior (name); }
+    }
+    catch ( IOException e ) { }
+
     //instantiate the player's character
-    pat = new Protagonist( name );
 
   }//end newGame()
 
@@ -96,7 +122,7 @@ public class YoRPG {
     post: Returns true if player wins (monster dies).
     Returns false if monster wins (player dies).
     =============================================*/
-  public boolean playTurn() {
+  public boolean playTurn(int encounters) {
     int i = 1;
     int d1, d2;
 
@@ -105,7 +131,9 @@ public class YoRPG {
     else {
       System.out.println( "\nLo, yonder monster approacheth!" );
 
-      smaug = new Monster();
+      if (encounters < 2) { smaug = new LowLevel(); }
+      else if (encounters > 3) { smaug = new Boss(); }
+      else { smaug = new MidLevel(); }
 
       while( smaug.isAlive() && pat.isAlive() ) {
 
@@ -132,6 +160,16 @@ public class YoRPG {
 
         System.out.println( "\n" + "Ye Olde Monster smacked " + pat.getName() +
                             " for " + d2 + " points of damage.");
+
+	if ((isHealer) && (!alreadyHealed)) {
+		try {
+	          System.out.println( "\nHeal yourself?" );
+        	  System.out.println( "\t1: Nay.\n\t2: Aye!" );
+       		  int q = Integer.parseInt( in.readLine() );
+       		}
+	        catch ( IOException e ) { }
+		if (q == 2) { pat.heal(); alreadyHealed = true;  }
+	}
       }//end while
 
       //option 1: you & the monster perish
@@ -169,7 +207,7 @@ public class YoRPG {
     int encounters = 0;
 
     while( encounters < MAX_ENCOUNTERS ) {
-      if ( !game.playTurn() )
+      if ( !game.playTurn(encounters) )
         break;
       encounters++;
       System.out.println();

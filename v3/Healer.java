@@ -9,4 +9,12 @@ public class Healer extends Protagonist {
                 name = inName;
         }
 
+	public void heal() {
+		hp = 125;
 	}
+
+	public static String about() {
+		String description = "Allows protagonist to fully replenish hp once per game.";
+		 return description;
+	}
+}

@@ -213,7 +213,15 @@ public class YoRPG {
        		  i = Integer.parseInt( in.readLine() );
        		}
 	        catch ( IOException e ) { }
-		if (i == 2) { pat.heal();  alreadyHealed = true; System.out.println("You have been restored to full health! However, you have used up all your mana!"); }
+		if (i == 2) {
+                  pat.heal();
+                  alreadyHealed = true;
+                  System.out.println("You have been restored to full health! " +
+                  "However, you have used up all your mana!");
+                }
+//		System.out.println("pat's hp: " + pat.hp);
+//		if (alreadyHealed) { System.out.println("No more healing!"); }
+//		else { System.out.println("Healing is still available!"); }
 	}
       }//end while
 

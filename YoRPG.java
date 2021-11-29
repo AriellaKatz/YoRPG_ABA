@@ -2,25 +2,27 @@
  * class YoRPG -- Driver file for Ye Olde Role Playing Game.
  * Simulates monster encounters of a wandering adventurer.
  * Required classes: Protagonist, Monster
- * 
+ *
  * USAGE:
  * Compile. Note messages generated.
  * Devise a plan of attack with your trio.
  * Code incrementally, testing each bit of new functionality as you go.
  * The only modification you should make to this driver file is moving comment bar down in main method, and filling in DISCO/QCC
  * (If you feel other changes are merited, note what and why, so that we may discuss on the 'morrow.)
- * 
- * DISCO:
  *
+ * DISCO:
+ *  Inheritance
+ *  super, super()
+ *  protector is a 3rd option for privacy
  * QCC:
- * 
+ *
  **********************************************/
 
 /*
 OUR DRIVER MODS:
 Removed instantiations of the protagonist and the monster so that we would later be able to specify what type of protagonist or
 monster it would be. Added code to choose protagonist based on player input and choose monster type based on how many rounds
-had been played.
+had been played. Added code to allow player to utilize Healer capabilities if the player is a Healer.
 */
 
 import java.io.*;
@@ -33,12 +35,8 @@ public class YoRPG {
   //change this constant to set number of encounters in a game
   public final static int MAX_ENCOUNTERS = 5;
 
-  private Healer pat;
-  private Tank pat;
-  private Warrior pat;
-  private LowLevel smaug;
-  private MidLevel smaug;
-  private Boss smaug;
+  private Protagonist pat;
+  private Monster smaug;
 
   private int moveCount;
   private boolean gameOver;
@@ -63,13 +61,13 @@ public class YoRPG {
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-  
+
   // ~~~~~~~~~~~~~~ METHODS ~~~~~~~~~~~~~~~~~~~
 
   /*=============================================
     void newGame() -- gathers info to begin a new game
-    pre:  
-    post: according to user input, modifies instance var for difficulty 
+    pre:
+    post: according to user input, modifies instance var for difficulty
     and instantiates a Protagonist
     =============================================*/
   public void newGame() {
@@ -96,6 +94,7 @@ public class YoRPG {
 	    name = in.readLine();
     }
     catch ( IOException e ) { }
+//  System.out.println("Your name: " + name);
 
     s += name + ", choose your player:\n";
     s += "\t1: Healer\n";
@@ -105,9 +104,20 @@ public class YoRPG {
     System.out.print(s);
 
     try {
-	    if (Integer.parseInt(in.readLine()) == 1) { pat = new Healer (name); isHealer = true; }
-	    else if (Integer.parseInt(in.readLine()) == 2) { pat = new Tank (name); }
-	    else if (Integer.parseInt(in.readLine()) == 3) { pat = new Warrior (name); }
+	    int num = Integer.parseInt(in.readLine());
+	    if (num == 1) {
+	      pat = new Healer (name);
+              isHealer = true;
+//	      System.out.println("\n" + name + "is a Healer")
+            }
+	    else if (num == 2) {
+	      pat = new Tank (name);
+//            System.out.println("\n" + name + "is a Tank")
+            }
+	    else if (num == 3) {
+              pat = new Warrior (name);
+//            System.out.println("\n" + name + "is a Warrior")
+            }
     }
     catch ( IOException e ) { }
 
@@ -131,9 +141,30 @@ public class YoRPG {
     else {
       System.out.println( "\nLo, yonder monster approacheth!" );
 
-      if (encounters < 2) { smaug = new LowLevel(); }
-      else if (encounters > 3) { smaug = new Boss(); }
-      else { smaug = new MidLevel(); }
+      if (encounters < 2) {
+        smaug = new LowLevel();
+//      System.out.println("smaug is LowLevel");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
+      else if (encounters > 3) {
+        smaug = new Boss();
+//      System.out.println("smaug is Boss");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
+      else {
+        smaug = new MidLevel();
+//      System.out.println("smaug is MidLevel");
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+      }
 
       while( smaug.isAlive() && pat.isAlive() ) {
 
@@ -147,10 +178,16 @@ public class YoRPG {
         }
         catch ( IOException e ) { }
 
-        if ( i == 2 )
+        if ( i == 2 ) {
           pat.specialize();
-        else
+//        System.out.println(name + "'s attack rating is " + pat.attackRating);
+//        System.out.println(name + "'s defense is " + pat.getDefense());
+        }
+        else {
           pat.normalize();
+//        System.out.println(name + "'s attack rating is " + pat.attackRating);
+//        System.out.println(name + "'s defense is " + pat.getDefense());
+        }
 
         d1 = pat.attack( smaug );
         d2 = smaug.attack( pat );
@@ -160,21 +197,38 @@ public class YoRPG {
 
         System.out.println( "\n" + "Ye Olde Monster smacked " + pat.getName() +
                             " for " + d2 + " points of damage.");
+//      System.out.println("pat's stats:\n" + "hp: " +
+//      pat.hp + "\tstrength: " + pat.strength +
+//      "\tdefense: " + pat.getDefense() + "\tattackRating: " +
+//      pat.attackRating);
+//      System.out.println("smaug's stats:\n" + "hp: " +
+//      smaug.hp + "\tstrength: " + smaug.strength +
+//      "\tdefense: " + smaug.getDefense() + "\tattackRating: " +
+//      smaug.attackRating);
+
 
 	if ((isHealer) && (!alreadyHealed)) {
 		try {
 	          System.out.println( "\nHeal yourself?" );
         	  System.out.println( "\t1: Nay.\n\t2: Aye!" );
-       		  int q = Integer.parseInt( in.readLine() );
+       		  i = Integer.parseInt( in.readLine() );
        		}
 	        catch ( IOException e ) { }
-		if (q == 2) { pat.heal(); alreadyHealed = true;  }
+		if (i == 2) {
+                  pat.heal();
+                  alreadyHealed = true;
+                  System.out.println("You have been restored to full health! " +
+                  "However, you have used up all your mana!");
+                }
+//		System.out.println("pat's hp: " + pat.hp);
+//		if (alreadyHealed) { System.out.println("No more healing!"); }
+//		else { System.out.println("Healing is still available!"); }
 	}
       }//end while
 
       //option 1: you & the monster perish
       if ( !smaug.isAlive() && !pat.isAlive() ) {
-        System.out.println( "'Twas an epic battle, to be sure... " + 
+        System.out.println( "'Twas an epic battle, to be sure... " +
                             "You cut ye olde monster down, but " +
                             "with its dying breath ye olde monster. " +
                             "laid a fatal blow upon thee." );
@@ -198,7 +252,7 @@ public class YoRPG {
 
 
   public static void main( String[] args ) {
-    //As usual, move the begin-comment bar down as you progressively 
+    //As usual, move the begin-comment bar down as you progressively
     //test each new bit of functionality...
 
     //loading...

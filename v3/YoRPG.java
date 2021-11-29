@@ -104,16 +104,17 @@ public class YoRPG {
     System.out.print(s);
 
     try {
-	    if (Integer.parseInt(in.readLine()) == 1) {
+	    int num = Integer.parseInt(in.readLine());
+	    if (num == 1) {
 	      pat = new Healer (name);
               isHealer = true;
 //	      System.out.println("\n" + name + "is a Healer")
             }
-	    else if (Integer.parseInt(in.readLine()) == 2) {
+	    else if (num == 2) {
 	      pat = new Tank (name);
 //            System.out.println("\n" + name + "is a Tank")
             }
-	    else if (Integer.parseInt(in.readLine()) == 3) {
+	    else if (num == 3) {
               pat = new Warrior (name);
 //            System.out.println("\n" + name + "is a Warrior")
             }

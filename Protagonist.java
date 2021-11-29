@@ -12,8 +12,11 @@ public class Protagonist extends Character {
       pre:  instance vars are declared
       post: initializes instance vars.
       **/
-    public Protagonist(int hp, int strength, int defense, double attackRating) {
-        super(hp, strength, defense, attackRating);
+    public Protagonist() {
+        hp = 125;
+        strength = 100;
+        defense = 40;
+        attackRating = .4;
     }
 
 
@@ -33,15 +36,17 @@ public class Protagonist extends Character {
 
     //prepare a Protagonist for a special attack
     public void specialize() {
-        attack = .75;
+        attackRating = .75;
         defense = 20;
     }
 
     //revert to normal mode
     public void normalize() {
-        attack = .4;
+        attackRating = .4;
         defense = 40;
     }
 
-}//end class Protagonist
+    public void heal() {
+    }
 
+}//end class Protagonist

@@ -25,13 +25,6 @@ public class Character {
 	protected int defense;
 	protected double attackRating;
 
-	public Character(int hp, int strength, int defense, double attackRating) {
-		this.hp = hp;
-		this.strength = strength;
-		this.defense = defense;
-		this.attackRating = attackRating;
-	}
-
 	public boolean isAlive() {
 		return (hp > 0);
 	}

@@ -1,5 +1,5 @@
 /*
-  class Monster -- Represents random incarnations of 
+  class Monster -- Represents random incarnations of
   the adventurer's natural enemy in Ye Olde RPG
 **/
 
@@ -10,8 +10,11 @@ public class Monster extends Character {
      pre:  instance vars are declared
      post: initializes instance vars.
   **/
-  public Monster(int hp, int strength, int defense, double attackRating) {
-    super(hp, strength, defense, attackRating)
+  public Monster() {
+    hp = 150;
+    strength = 20 + (int)(Math.random()*45);
+    defense = 20;
+    attackRating = 1;
   }
 
 }//end class Monster
